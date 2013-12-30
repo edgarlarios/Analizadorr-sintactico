@@ -1,0 +1,5 @@
+begin 
+n := 3.4 * 5 ;
+c1 := ( 3 < 3 ) or ( 5 * 3 >= 4 ) ;
+o := 6 > 20 ? true : false 
+end 

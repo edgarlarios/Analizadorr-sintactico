@@ -1,0 +1,348 @@
+#include<cstdio>
+#include <iostream>
+#include "scanner.h"
+#include<cstdlib>
+#include<stack>
+
+int pi;
+tipolex t;
+
+
+bool LL_one(){
+         
+ t=scanner.next();
+ stack.push(body);
+        
+   do{
+        X=stack.pop();
+        if(X==100){
+            if(X==t)t=scanner.next();
+            else return false;
+        }
+        else{
+            pi=T(X,t)
+        }             
+                     
+                     
+                     
+   
+void T(  
+   
+   case _body:
+        if(t==_begin){
+            stack.push(end);
+            stack.push(eseq);
+            stack.push(begin);
+            return 1;
+        }
+        
+   case _eseq:
+        if(t==_id){
+               stack.push(_eseqP);
+               stack.push(_assign);
+               return 2;
+        }  
+        
+   case _eseqP:
+        if(t==_puntCom){
+             stack.push(_eseqP);
+             stack.push(__assign);
+             stack.push(_puntCom);
+             return 3;
+             
+        }
+        if(t==_end){
+              return 4;
+        }
+        
+   case _assign:
+        if(t==_id){
+            stack.push(_quest);
+            stack.push(_dosPuntos);
+            stack.push(_id);
+            return 5;
+        }
+        
+   case _quest:
+         if(t==_menos){
+             stack.push(_questP);
+             stack.push(_prop);
+             return 6;
+         }   
+          if(t==_not){
+             stack.push(_questP);
+             stack.push(_prop);
+             return 6;
+         }   
+          if(t==_parIzq){
+             stack.push(_questP);
+             stack.push(_prop);
+             return 6;
+         }   
+          if(t==__num){
+             stack.push(_questP);
+             stack.push(_prop);
+             return 6;
+         }   
+          if(t==_true){
+             stack.push(_questP);
+             stack.push(_prop);
+             return 6;
+         }   
+          if(t==_false){
+             stack.push(_questP);
+             stack.push(_prop);
+             return 6;
+         }   
+   
+   case _questP:
+          if(t==_puntCom){
+               return 8;
+          }
+          if(t==_end){
+               return 8;
+          }
+          if(t==_dosPuntos){
+               return 8;
+          }
+          if(t==_interrogativo){
+               stack.push(_quest);
+               stack.push(_dosPuntos);
+               stack.push(_quest);
+               stack.push(_interrogativo);
+               return 7;
+          }
+          
+   case _prop:
+            if(t==_menos){
+             stack.push(_propP);
+             stack.push(_clause);
+             return 9;
+         }   
+          if(t==_not){
+             stack.push(_propP);
+             stack.push(_clause);
+             return 9;
+         }   
+          if(t==_parIzq){
+             stack.push(_propP);
+             stack.push(_clause);
+             return 9;
+         }   
+          if(t==__num){
+            stack.push(_propP);
+             stack.push(_clause);
+             return 9;
+         }   
+          if(t==_true){
+             stack.push(_propP);
+             stack.push(_clause);
+             return 9;
+         }   
+          if(t==_false){
+             stack.push(_propP);
+             stack.push(_clause);
+             return 9;
+         }   
+       
+    case _propP:
+         if(t==_puntCom || t== _interrogativo || t==_end){
+              return 11;    
+         }
+        if(t==_or){
+               stack.push(_propP);
+               stack.push(_clause);
+               stack.push(_or);
+               return 10;
+        }
+        
+     case _clause:
+           if(t==_menos){
+             stack.push(_clause);
+             stack.push(_rel);
+             return 12;
+          }   
+          if(t==_not){
+             stack.push(_clause);
+             stack.push(_rel);
+             return 12;
+         }   
+          if(t==_parIzq){
+             stack.push(_clause);
+             stack.push(_rel);
+             return 12;
+         }   
+          if(t==__num){
+            stack.push(_clause);
+             stack.push(_rel);
+             return 12;
+         }   
+          if(t==_true){
+             stack.push(_clause);
+             stack.push(_rel);
+             return 12;
+         }   
+          if(t==_false){
+             stack.push(_clause);
+             stack.push(_rel);
+             return 12;
+         }    
+         
+    case _clauseP:
+                
+          if(t==_puntCom){
+               return 14;
+          }
+          if(t==_end){
+               return 14;
+          }
+          if(t==_dosPuntos){
+               return 14;
+          }
+          if(t==_or){
+                return 14;
+          }
+          if(t==_interrogativo){
+               return 14;              
+          }          
+          if(t==_and){
+                stack.push(_clauseP);   
+                stack.push(_rel);         
+                stack.push(_and);
+                return 13; 
+          }  
+          
+    case _rel:
+         if(t==_menos || t== _parIzq || t== _num || t==_not || t==_true || t==_false ){
+               stack.push(_relP);
+               stack.push(_exp); 
+               return 15;
+         }
+         
+    case _relP:
+         if(t==_puntCom || t==_interrogativo || t==_end || t==_and || t==_or || t==_dosPuntos){
+                 return 22;
+         }
+         if(t==_mayQ){
+                 stack.push(_exp);
+                 stack.push(_mayQ);
+                 return 17;
+         }
+         if(t==_menQ){
+                 stack.push(_exp);
+                 stack.push(_menq); 
+                 return 16;       
+         }
+          if(t==_menIg){
+                 stack.push(_exp);
+                 stack.push(_menIg);
+                 return 18;
+         }
+         if(t==_mayIg){
+                 stack.push(_exp);
+                 stack.push(_mayIg);
+                 return 19;
+         }
+         if(t==_igualdad){
+                 stack.push(_exp);
+                 stack.push(_igualdad);
+                 return 20; 
+         }           
+         if(t==_desig){
+                 stack.push(_exp);
+                 stack.push(_desig);
+                 return 21;
+         } 
+    
+   case _exp:
+        if(t==_menos || t== _parIzq || t== _num || t==_not || t==_true || t==_false ){
+                 stack.push(_expP); 
+                 stack.push(_term);
+                 return 23;
+        }          
+        
+   case _expP:
+        if(t==_menQ || t==_mayQ || t==_menIg || t==_mayIg || t==_igualdad ){
+                    return 26;
+        if(t==_desig || t==_and || t==_or || t== _interrogativo || t== _dosPuntos || t== _end){
+                    return 26;
+        }
+        if(t== _sum){
+                  stack.push(_expP); 
+                  stack.push(_term); 
+                  stack.push(_sum); 
+                  return 24;
+        }
+        if(t== _rest){
+                  stack.push(_expP); 
+                  stack.push(_term); 
+                  stack.push(_rest);
+                  return 25;
+        }
+        
+ 
+   case _term:
+        if(t==_menos || t== _parIzq || t== _num || t==_not || t==_true || t==_false ){
+               stack.push(_termP);
+               stack.push(_fact); 
+               return 27;
+         }
+   
+   
+   case _termP:
+        if(t==_menQ || t==_mayQ || t==_menIg || t==_mayIg || t==_igualdad || t==_sum || t== _rest){
+                    return 30;
+        if(t==_desig || t==_and || t==_or || t== _interrogativo || t== _dosPuntos || t== _end){
+                    return 30;
+        }
+        if(t== _mult){
+               stack.push(_termP);
+               stack.push(_fact);
+               stack.push(_mult);
+               return 28;
+        }
+        if(t== _div){
+               stack.push(_termP);
+               stack.push(_fact);
+               stack.push(_div);
+               return 29;
+        }
+        
+   case _fact:
+         if(t==_menos){
+             stack.push(_fact);
+             stack.push(_rest);
+             return 31;
+         }   
+          if(t==_not){
+             stack.push(_fact);
+             stack.push(_not);
+             return 32;
+         }   
+          if(t==_parIzq){
+             stack.push(_parDer);
+             stack.push(_quest);
+             stack.push(_parIzq);
+             return 33;
+         }   
+          if(t==__num){
+             stack.push(_num);
+             return 34;
+         }   
+          if(t==_true){
+             stack.push(_true);
+             return 35;
+         }   
+          if(t==_false){
+             stack.push(_false);    
+             return 36;         
+         }    
+        
+               
+                     
+                     
+                     
+                     
+                     
+                     
+        
